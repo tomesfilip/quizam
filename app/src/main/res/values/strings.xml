@@ -2,4 +2,6 @@
     <string name="app_name">Quizam</string>
     <string name="headline_category_list">Choose a category</string>
     <string name="headline_results">Results</string>
+    <string name="results_time">Time played</string>
+    <string name="results_points">Points earned</string>
 </resources>
