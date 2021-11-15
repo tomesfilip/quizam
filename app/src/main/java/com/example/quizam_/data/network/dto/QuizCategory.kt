@@ -2,13 +2,12 @@ package com.example.quizam_.data.network.dto
 
 import com.example.quizam_.domain.model.QuizCategory
 
-data class TriviaCategory(
+data class QuizCategory(
     val id: Int,
     val name: String
 )
 
-
-fun TriviaCategory.toQuizCategory(): QuizCategory {
+fun QuizCategory.toQuizCategory(): QuizCategory {
     return QuizCategory(
         id = id,
         name = name

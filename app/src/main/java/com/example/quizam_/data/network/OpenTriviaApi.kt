@@ -10,11 +10,11 @@ interface OpenTriviaApi {
 @GET("api_category.php")
 suspend fun getQuizCategories(): QuizCategoryListDto
 
-@GET("api.php")
+@GET("api.php?amount=20&type=multiple")
 suspend fun getQuizCardsByCategory(
-    @Query("amount") amount: Int,
     @Query("category") category: Int,
-    @Query("type") type: String
+//    @Query("amount") amount: Int,
+//    @Query("type") type: String
 ): QuizCardListDto
 
 }

@@ -2,7 +2,7 @@ package com.example.quizam_.data.network.dto
 
 import com.example.quizam_.domain.model.QuizCard
 
-data class Result(
+data class QuizCard(
     val category: String,
     val correct_answer: String,
     val difficulty: String,
@@ -11,7 +11,7 @@ data class Result(
     val type: String
 )
 
-fun Result.toQuizCard(): QuizCard {
+fun QuizCard.toQuizCard(): QuizCard {
     return QuizCard(
         category = category,
         correct_answer = correct_answer,
@@ -19,5 +19,6 @@ fun Result.toQuizCard(): QuizCard {
         incorrect_answers = incorrect_answers,
         question = question,
         type = type
+
     )
 }
