@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Quizam</string>
+    <string name="headline_category_list">Choose a category</string>
+    <string name="headline_results">Results</string>
+</resources>
