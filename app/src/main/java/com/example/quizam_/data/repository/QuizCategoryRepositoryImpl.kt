@@ -11,5 +11,4 @@ class QuizCategoryRepositoryImpl @Inject constructor(
     override suspend fun getCategories(): List<QuizCategory> {
         return api.getQuizCategories().trivia_categories
     }
-
 }
