@@ -1,4 +1,6 @@
 package com.example.quizam_.presentation
 
-class Screen {
+sealed class Screen(val route: String) {
+    object CategoryListScreen: Screen("category_list_screen")
+    object CardListScreen: Screen("card_list_screen")
 }
