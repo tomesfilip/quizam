@@ -2,8 +2,10 @@ package com.example.quizam_.di
 
 import com.example.quizam_.common.Constants.BASE_URL_TRIVIA
 import com.example.quizam_.data.network.OpenTriviaApi
+import com.example.quizam_.data.repository.QuizCardRepositoryImpl
 import com.example.quizam_.data.repository.QuizCategoryRepositoryImpl
 import com.example.quizam_.domain.repository.CategoryRepository
+import com.example.quizam_.domain.repository.QuizCardRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,5 +32,11 @@ object AppModule {
     @Singleton
     fun provideCategoryRepository(api: OpenTriviaApi): CategoryRepository {
         return QuizCategoryRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuizCardRepository(api: OpenTriviaApi): QuizCardRepository {
+        return QuizCardRepositoryImpl(api)
     }
 }

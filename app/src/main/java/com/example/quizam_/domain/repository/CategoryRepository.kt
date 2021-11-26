@@ -1,7 +1,7 @@
 package com.example.quizam_.domain.repository
 
-import com.example.quizam_.domain.model.QuizCategory
+import com.example.quizam_.data.network.dto.QuizCategoryListDto
 
 interface CategoryRepository {
-    suspend fun getCategories(): List<QuizCategory>
+    suspend fun getCategories(): QuizCategoryListDto
 }

@@ -1,6 +1,7 @@
 package com.example.quizam_.data.network.dto
 
 import com.example.quizam_.domain.model.QuizCard
+import com.example.quizam_.domain.model.QuizCategory
 
 data class QuizCard(
     val category: String,
@@ -19,6 +20,5 @@ fun QuizCard.toQuizCard(): QuizCard {
         incorrect_answers = incorrect_answers,
         question = question,
         type = type
-
     )
 }
