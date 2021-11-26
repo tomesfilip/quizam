@@ -26,10 +26,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quizam_.R
+import com.example.quizam_.presentation.category_list.CategoryListScreen
 import com.example.quizam_.presentation.ui.theme.LightRed
 import com.example.quizam_.presentation.ui.theme.Quizam_Theme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,32 +49,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    Quizam_Theme {
-        Greeting("Android")
-    }
-}
-
-@Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "splash_screen") {
         composable("splash_screen") {
             SplashScreen(navController = navController)
         }
-        composable("main_screen") {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(color = LightRed)
-                , contentAlignment = Alignment.Center) {
-                Greeting("Main Screen")
-            }
+        composable(Screen.CategoryListScreen.route) {
+            CategoryListScreen(navController)
         }
     }
 }
@@ -91,7 +77,7 @@ fun SplashScreen(navController: NavController) {
             )
         )
         delay(3000L)
-        navController.navigate("main_screen")
+        navController.navigate(Screen.CategoryListScreen.route)
     }
     Box(contentAlignment = Alignment.Center,
     modifier = Modifier.fillMaxSize()) {

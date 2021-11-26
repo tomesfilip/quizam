@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.category_list.components.CategoryListItem
@@ -21,7 +22,7 @@ import com.example.quizam_.presentation.category_list.components.CategoryListIte
 @Composable
 fun CategoryListScreen(
     navController: NavController,
-    viewModel: CategoryListViewModel
+    viewModel: CategoryListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
