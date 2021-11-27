@@ -1,16 +1,22 @@
 package com.example.quizam_.presentation.category_list.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.quizam_.R
 import com.example.quizam_.domain.model.QuizCategory
 
 @Composable
@@ -18,16 +24,25 @@ fun CategoryListItem(
     quizCategory: QuizCategory,
     onItemClick: (QuizCategory) -> Unit
 ) {
-    Row(
+    var displayedName: String = if (!quizCategory.name.contains(":"))
+        quizCategory.name else quizCategory.name.split(":")[1]
+
+    Box(
      modifier = Modifier
-         .fillMaxWidth()
          .clickable { onItemClick(quizCategory) }
-         .padding(20.dp),
-    horizontalArrangement = Arrangement.Center
+         .padding(16.dp)
+         .clip(RoundedCornerShape(topStartPercent = 20, bottomEndPercent = 20))
+         .background(color = colorResource(id = R.color.bright_yellow))
+         .height(120.dp)
+         .aspectRatio(1f),
+    contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "${quizCategory.name}",
-            style = MaterialTheme.typography.h2
+            text = displayedName,
+            style = MaterialTheme.typography.h2,
+            color = Color.Black,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(4.dp)
         )
     }
 }

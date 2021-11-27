@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,15 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.category_list.CategoryListScreen
-import com.example.quizam_.presentation.ui.theme.LightRed
 import com.example.quizam_.presentation.ui.theme.Quizam_Theme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -35,12 +35,13 @@ import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Quizam_Theme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = LightRed, modifier = Modifier.fillMaxSize()){
+                Surface(modifier = Modifier.fillMaxSize()){
                     Navigation()
                 }
             }
@@ -48,6 +49,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalFoundationApi
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -76,11 +78,13 @@ fun SplashScreen(navController: NavController) {
                 }
             )
         )
-        delay(3000L)
+        delay(1000L)
         navController.navigate(Screen.CategoryListScreen.route)
     }
     Box(contentAlignment = Alignment.Center,
-    modifier = Modifier.fillMaxSize()) {
+    modifier = Modifier
+        .fillMaxSize()
+        .background(colorResource(id = R.color.light_red))) {
         Image(
             painter = painterResource(id = R.drawable.ic_quizam_logo),
             contentDescription = "Logo",

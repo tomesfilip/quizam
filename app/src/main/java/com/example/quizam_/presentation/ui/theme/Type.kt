@@ -29,18 +29,18 @@ val Typography = Typography(
     ),
     h1 = TextStyle(
         fontFamily = fonts,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 32.sp
     ),
     h2 = TextStyle(
         fontFamily = fonts,
         fontWeight = FontWeight.Normal,
-        fontSize = 26.sp
+        fontSize = 18.sp
     ),
     h3 = TextStyle(
         fontFamily = fonts,
         fontWeight = FontWeight.Medium,
-        fontSize = 20.sp
+        fontSize = 16.sp
     ),
 )
 
