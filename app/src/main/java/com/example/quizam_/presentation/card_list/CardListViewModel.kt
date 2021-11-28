@@ -1,12 +1,18 @@
 package com.example.quizam_.presentation.card_list
 
+import android.util.Log
+import android.util.Log.DEBUG
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.constraintlayout.solver.LinearSystem.DEBUG
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.quizam_.BuildConfig.DEBUG
+import com.example.quizam_.common.Constants
 import com.example.quizam_.common.Resource
 import com.example.quizam_.domain.use_case.GetQuizCards
+import com.example.quizam_.presentation.category_list.CategoryListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -17,11 +23,14 @@ class CardListViewModel @Inject constructor(
     private val getQuizCardsUseCase: GetQuizCards,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
     private val _state = mutableStateOf(CardListState())
     val state: State<CardListState> = _state
 
     init {
-        savedStateHandle.get<String>("12")?.let { id -> getQuizCardsUseCase(id.toInt()) }
+        savedStateHandle.get<String>(Constants.QUERY_CATEGORY_ID)?.let { categoryId ->
+            getQuizCards(categoryId.toInt())
+        }
     }
 
     private fun getQuizCards(id: Int) {

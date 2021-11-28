@@ -18,14 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.quizam_.R
 import com.example.quizam_.domain.model.QuizCategory
+import com.example.quizam_.presentation.util.truncateCategoryName
 
 @Composable
 fun CategoryListItem(
     quizCategory: QuizCategory,
     onItemClick: (QuizCategory) -> Unit
 ) {
-    var displayedName: String = if (!quizCategory.name.contains(":"))
-        quizCategory.name else quizCategory.name.split(":")[1]
 
     Box(
      modifier = Modifier
@@ -38,7 +37,7 @@ fun CategoryListItem(
     contentAlignment = Alignment.Center
     ) {
         Text(
-            text = displayedName,
+            text = truncateCategoryName(quizCategory.name),
             style = MaterialTheme.typography.h2,
             color = Color.Black,
             textAlign = TextAlign.Center,

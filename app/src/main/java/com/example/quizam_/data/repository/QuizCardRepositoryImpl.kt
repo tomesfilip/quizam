@@ -9,7 +9,7 @@ class QuizCardRepositoryImpl @Inject constructor(
     private val api: OpenTriviaApi
 ) :  QuizCardRepository {
 
-    override suspend fun getQuizCardsByCategory(id: Int): QuizCardListDto {
-        return api.getQuizCardsByCategory(id)
+    override suspend fun getQuizCardsByCategory(category: Int): QuizCardListDto {
+        return api.getQuizCardsByCategory(category)
     }
 }

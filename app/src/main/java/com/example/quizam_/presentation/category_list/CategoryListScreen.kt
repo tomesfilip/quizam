@@ -1,6 +1,7 @@
 package com.example.quizam_.presentation.category_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,19 +54,22 @@ fun CategoryContent(
 ) {
     val state = viewModel.state.value
     
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.light_red))) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),
-            contentPadding = PaddingValues(12.dp),
+            contentPadding = PaddingValues(32.dp),
             modifier = Modifier
                 .fillMaxSize()
-                .padding(10.dp)
         ) {
             items(state.categories) { category ->
                 CategoryListItem(
                     quizCategory = category,
                     onItemClick =  {
                         navController.navigate(Screen.CardListScreen.route + "/${category.id}")
+//                        navController.navigate(Screen.CardListScreen.route)
                     }
                 )
             }
@@ -71,7 +77,7 @@ fun CategoryContent(
         if (state.error.isNotBlank()) {
             Text(
                 text = state.error,
-                color = MaterialTheme.colors.error,
+                color = Color.White,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()

@@ -7,14 +7,12 @@ import retrofit2.http.Query
 
 interface OpenTriviaApi {
 
-@GET("api_category.php")
-suspend fun getQuizCategories(): QuizCategoryListDto
+    @GET("api_category.php")
+    suspend fun getQuizCategories(): QuizCategoryListDto
 
-@GET("api.php?amount=20&type=multiple")
-suspend fun getQuizCardsByCategory(
-    @Query("category") category: Int,
-//    @Query("amount") amount: Int,
-//    @Query("type") type: String
-): QuizCardListDto
+    @GET("api.php?amount=20&type=multiple")
+    suspend fun getQuizCardsByCategory(
+        @Query("category") category: Int
+    ): QuizCardListDto
 
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="KotlinCommonCompilerArguments">
     <option name="apiVersion" value="1.5" />
-    <option name="languageVersion" value="1.5" />
+    <option name="languageVersion" value="1.6" />
   </component>
   <component name="KotlinCompilerSettings">
     <option name="additionalArguments" value="--stacktrace --debug" />

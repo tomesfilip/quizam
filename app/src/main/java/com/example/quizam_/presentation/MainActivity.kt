@@ -11,6 +11,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quizam_.R
+import com.example.quizam_.presentation.card_list.CardListScreen
 import com.example.quizam_.presentation.category_list.CategoryListScreen
 import com.example.quizam_.presentation.ui.theme.Quizam_Theme
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +43,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             Quizam_Theme {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize()){
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.primary
+                ) {
                     Navigation()
                 }
             }
@@ -60,6 +65,13 @@ fun Navigation() {
         composable(Screen.CategoryListScreen.route) {
             CategoryListScreen(navController)
         }
+        composable(
+            route = Screen.CardListScreen.route + "/{category}"
+//            route = Screen.CardListScreen.route
+        ) {
+            CardListScreen(navController = navController)
+        }
+
     }
 }
 
@@ -80,6 +92,7 @@ fun SplashScreen(navController: NavController) {
         )
         delay(1000L)
         navController.navigate(Screen.CategoryListScreen.route)
+
     }
     Box(contentAlignment = Alignment.Center,
     modifier = Modifier
