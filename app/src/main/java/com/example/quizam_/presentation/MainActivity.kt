@@ -9,24 +9,18 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,6 +28,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.card_list.CardListScreen
 import com.example.quizam_.presentation.category_list.CategoryListScreen
+import com.example.quizam_.presentation.game_start.GameStartScreen
+import com.example.quizam_.presentation.game_result.ResultScreen
 import com.example.quizam_.presentation.ui.theme.Quizam_Theme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -66,6 +62,9 @@ fun Navigation() {
         composable("splash_screen") {
             SplashScreen(navController = navController)
         }
+        composable(Screen.GameStartScreen.route) {
+            GameStartScreen(navController)
+        }
         composable(Screen.CategoryListScreen.route) {
             CategoryListScreen(navController)
         }
@@ -74,6 +73,9 @@ fun Navigation() {
 //            route = Screen.CardListScreen.route
         ) {
             CardListScreen(navController = navController)
+        }
+        composable(Screen.GameResultScreen.route) {
+            ResultScreen(navController)
         }
 
     }
@@ -95,7 +97,8 @@ fun SplashScreen(navController: NavController) {
             )
         )
         delay(1000L)
-        navController.navigate(Screen.CategoryListScreen.route)
+        navController.navigate(Screen.GameStartScreen.route)
+//        navController.navigate(Screen.CategoryListScreen.route)
 
     }
     Box(contentAlignment = Alignment.Center,

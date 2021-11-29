@@ -1,5 +1,6 @@
 package com.example.quizam_.domain.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,6 +8,6 @@ import androidx.room.PrimaryKey
 data class User(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val userName: String,
-    val userScore: Int,
+    @ColumnInfo(name = "user_score") val userScore: Int,
 ) {
 }

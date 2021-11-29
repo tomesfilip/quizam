@@ -1,4 +1,4 @@
-package com.example.quizam_.presentation.result
+package com.example.quizam_.presentation.game_result
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -52,7 +51,7 @@ fun ResultScreen(
         }
         Column() {
             Button(
-                onClick = { navController.navigate(Screen.CardListScreen.route)},
+                onClick = { navController.navigate(Screen.GameStartScreen.route)},
 
             ) {
                 Image(
