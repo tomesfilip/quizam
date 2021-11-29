@@ -25,7 +25,7 @@ class CategoryListViewModel @Inject constructor(
     private fun getCategories() {
         getCategoriesUseCase().onEach { result ->
             when (result) {
-                is Resource.Success -> {
+                is Resource.Success -> { 
                     _state.value = CategoryListState(categories = result.data ?: emptyList())
                 }
                 is Resource.Error -> {

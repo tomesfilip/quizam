@@ -69,7 +69,6 @@ fun CategoryContent(
                     quizCategory = category,
                     onItemClick =  {
                         navController.navigate(Screen.CardListScreen.route + "/${category.id}")
-//                        navController.navigate(Screen.CardListScreen.route)
                     }
                 )
             }
