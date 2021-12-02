@@ -27,6 +27,9 @@ class CardListViewModel @Inject constructor(
     private val _state = mutableStateOf(CardListState())
     val state: State<CardListState> = _state
 
+    private val _currentCard = mutableStateOf(0)
+    val currentCard: State<Int> = _currentCard
+
     init {
         savedStateHandle.get<String>(Constants.QUERY_CATEGORY_ID)?.let { categoryId ->
             getQuizCards(categoryId.toInt())

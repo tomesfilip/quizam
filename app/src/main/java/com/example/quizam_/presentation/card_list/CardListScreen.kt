@@ -36,6 +36,13 @@ fun CardListScreen(
         },
         content = {
             CardListContent(navController = navController, viewModel = viewModel)
+        },
+        bottomBar = {
+            CardListCategoryBottom(
+                categoryName = if (!viewModel.state.value.isLoading)
+                    truncateCategoryName(viewModel.state.value.cards[0].category)
+                else ""
+            )
         }
     )
 }
@@ -46,36 +53,43 @@ fun CardListContent(
     viewModel: CardListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val currentCard = viewModel.currentCard.value
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.light_red))
+            .background(colorResource(id = R.color.light_red)),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LazyColumn(
+        Column(
             modifier = Modifier
-                .fillMaxSize(),
-            contentPadding = PaddingValues(20.dp)
+                .fillMaxWidth(0.8f)
+                .fillMaxHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(state.cards) { card ->
+            if (state.cards.isNotEmpty()) {
+                // question
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 ) {
+                    // question
                     Text(
-                        text = card.question,
+                        text = state.cards[currentCard].question,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.body1,
                         color = Color.White
                     )
+                    // TODO: options - show all options in a random order
+                    Text(
+                        text = state.cards[currentCard].correct_answer,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.body1,
+                        color = Color.Black
+                    )
                 }
             }
         }
-        CardListCategoryBottom(
-            categoryName = if (!state.isLoading)
-                truncateCategoryName(state.cards[0].category)
-            else ""
-        )
 
         if (state.error.isNotBlank()) {
             Text(
@@ -85,11 +99,10 @@ fun CardListContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
-                    .align(Alignment.Center)
             )
         }
         if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            CircularProgressIndicator()
         }
     }
 }
