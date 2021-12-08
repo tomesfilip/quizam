@@ -1,6 +1,7 @@
 package com.example.quizam_.presentation.card_list
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizam_.R
+import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.card_list.components.CardListCategoryBottom
 import com.example.quizam_.presentation.shared_components.ScreenHeadline
 import com.example.quizam_.presentation.util.truncateCategoryName
@@ -73,20 +75,27 @@ fun CardListContent(
                     modifier = Modifier
                         .fillMaxWidth(),
                 ) {
+                    if (currentCard.error == "End of questions.") {
+                        navController.navigate(Screen.GameResultScreen.route)
+                    }
                     // question
-                    Text(
-                        text = state.cards[currentCard].question,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.body1,
-                        color = Color.White
-                    )
-                    // TODO: options - show all options in a random order
-                    Text(
-                        text = state.cards[currentCard].correct_answer,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.body1,
-                        color = Color.Black
-                    )
+                    currentCard.quizCard?.let {
+                        Text(
+                            text = it.question,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.body1,
+                            color = Color.White
+                        )
+                    }
+                    currentCard.quizCard?.options?.forEach { option ->
+                        Text(
+                            text = option,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.body1,
+                            color = Color.Black,
+                            modifier = Modifier.clickable(onClick = { viewModel.nextQuizCard() })
+                        )
+                    }
                 }
             }
         }

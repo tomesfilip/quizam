@@ -19,6 +19,7 @@ fun QuizCard.toQuizCard(): QuizCard {
         difficulty = difficulty,
         incorrect_answers = incorrect_answers,
         question = question,
-        type = type
+        type = type,
+        options = (incorrect_answers + correct_answer).shuffled()
     )
 }

@@ -34,7 +34,7 @@ fun ResultScreen(
         ) {
             // TODO: username
             Text(
-                text = "",
+                text = "Username",
                 textAlign = TextAlign.Center,
                 color = colorResource(id = R.color.bright_yellow),
                 style = MaterialTheme.typography.h3
@@ -43,7 +43,7 @@ fun ResultScreen(
         Column() {
             // TODO: result score
             Text(
-                text = "",
+                text = "Score",
                 textAlign = TextAlign.Center,
                 color = colorResource(id = R.color.bright_yellow),
                 style = MaterialTheme.typography.h3
