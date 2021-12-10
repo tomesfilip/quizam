@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
@@ -26,22 +28,22 @@ fun CategoryListItem(
     onItemClick: (QuizCategory) -> Unit
 ) {
 
-    Box(
-     modifier = Modifier
-         .clickable { onItemClick(quizCategory) }
-         .padding(16.dp)
-         .clip(RoundedCornerShape(topStartPercent = 20, bottomEndPercent = 20))
-         .background(color = colorResource(id = R.color.bright_yellow))
-         .height(120.dp)
-         .aspectRatio(1f),
-    contentAlignment = Alignment.Center
+    Button(
+        onClick = { onItemClick(quizCategory) },
+        shape = RoundedCornerShape(topStartPercent = 20, bottomEndPercent = 20),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow),
+        contentPadding = PaddingValues(4.dp),
+        modifier = Modifier
+            .padding(12.dp)
+            .aspectRatio(1f)
+
     ) {
         Text(
             text = truncateCategoryName(quizCategory.name),
             style = MaterialTheme.typography.h2,
             color = Color.Black,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(4.dp)
+            modifier = Modifier.align(Alignment.CenterVertically)
         )
     }
 }

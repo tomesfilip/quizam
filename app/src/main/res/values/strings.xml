@@ -4,4 +4,5 @@
     <string name="headline_results">Results</string>
     <string name="results_time">Time played</string>
     <string name="results_points">Points earned</string>
+    <string name="last_card_error">End of questions</string>
 </resources>

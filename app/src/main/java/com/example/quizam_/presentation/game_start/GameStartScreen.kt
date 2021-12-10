@@ -57,7 +57,7 @@ fun GameStartScreen(
                         value = usrName,
                         onValueChange = { user ->
                             usrName = user
-//                            viewModel.onEvent(GameStartEvent.EnteredUserName(it))
+                            viewModel.onEvent(GameStartEvent.EnteredUserName(it.toString()))
                         },
                         label = {
                             Text(

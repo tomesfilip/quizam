@@ -1,11 +1,7 @@
 package com.example.quizam_.presentation.card_list
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -13,7 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -23,6 +18,7 @@ import androidx.navigation.NavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.card_list.components.CardListCategoryBottom
+import com.example.quizam_.presentation.card_list.components.QuizCardItem
 import com.example.quizam_.presentation.shared_components.ScreenHeadline
 import com.example.quizam_.presentation.util.truncateCategoryName
 
@@ -69,31 +65,18 @@ fun CardListContent(
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.size(40.dp))
             if (state.cards.isNotEmpty()) {
-                // question
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                ) {
-                    if (currentCard.error == "End of questions.") {
-                        navController.navigate(Screen.GameResultScreen.route)
-                    }
-                    // question
-                    currentCard.quizCard?.let {
-                        Text(
-                            text = it.question,
-                            textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.body1,
-                            color = Color.White
-                        )
-                    }
-                    currentCard.quizCard?.options?.forEach { option ->
-                        Text(
-                            text = option,
-                            textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.body1,
-                            color = Color.Black,
-                            modifier = Modifier.clickable(onClick = { viewModel.nextQuizCard() })
+                if (currentCard.error == stringResource(id = R.string.last_card_error)) {
+                    navController.navigate(Screen.GameResultScreen.route)
+                }
+                currentCard.quizCard.let { currentCard ->
+                    if (currentCard != null) {
+                        QuizCardItem(
+                            quizCard = currentCard,
+                            onSelectedOptionClick= {
+                                navController.navigate(Screen.GameResultScreen.route)
+                            }
                         )
                     }
                 }
