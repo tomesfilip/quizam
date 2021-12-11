@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -17,6 +18,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -24,6 +26,7 @@ import androidx.navigation.NavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.shared_components.ScreenHeadline
+import com.example.quizam_.presentation.ui.theme.Shapes
 
 @Composable
 fun GameStartScreen(
@@ -70,17 +73,23 @@ fun GameStartScreen(
                 Spacer(modifier = Modifier.height(20.dp))
                 Column() {
                     Button(
+                        shape = RoundedCornerShape(40.dp),
                         onClick = {
                             viewModel.onEvent(GameStartEvent.SaveUser)
                             navController.navigate(Screen.CategoryListScreen.route)
                         },
-//            Modifier.background()
+                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.bright_yellow)),
+                        modifier = Modifier.padding(12.dp),
                     ) {
-                        Icon(
-                            Icons.Filled.PlayArrow,
-                            contentDescription = "Play game button",
-                            tint = Color.Yellow,
-                            modifier = Modifier.scale(2f)
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_play_button),
+                            contentDescription = stringResource(id = R.string.play_button_desc),
+                            modifier = Modifier.size(32.dp).padding(start = 10.dp)
+                        )
+                        Text(
+                            text = stringResource(id = R.string.start_game),
+                            Modifier.padding(start = 10.dp, end = 12.dp),
+                            style = MaterialTheme.typography.h2
                         )
                     }
                 }
