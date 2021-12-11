@@ -9,12 +9,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.quizam_.R
 import com.example.quizam_.domain.model.QuizCard
-import com.example.quizam_.presentation.Screen
+import com.example.quizam_.presentation.util.parseText
 
 
 @Composable
@@ -27,14 +25,14 @@ fun QuizCardItem(
     .fillMaxWidth(),
     ) {
         Text(
-            text = quizCard.question,
+            text = parseText(quizCard.question),
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.h2,
             color = Color.White
         )
         Spacer(modifier = Modifier.size(20.dp))
         quizCard.options.forEach { option ->
-            QuizCardOption(option = option, onSelectOptionClick = onSelectedOptionClick)
+            QuizCardOption(option = parseText(option), onSelectOptionClick = onSelectedOptionClick)
         }
     }
 }

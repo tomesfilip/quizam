@@ -1,5 +1,6 @@
 package com.example.quizam_.presentation.game_result
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
@@ -24,8 +26,12 @@ import com.example.quizam_.presentation.game_start.GameStartEvent
 
 @Composable
 fun ResultScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: GameResultViewModel = hiltViewModel()
 ) {
+    val usersState = viewModel.usersState.value
+    Log.v("GameResultScreen", "usersState: ${usersState.users}")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,16 +44,18 @@ fun ResultScreen(
         ) {
             // TODO: username
             Text(
-                text = "Username",
+                text = "Username: ${usersState.users[0].userName}",
                 textAlign = TextAlign.Center,
                 color = colorResource(id = R.color.bright_yellow),
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.h3,
+                modifier = Modifier.padding(end = 12.dp)
             )
+
         }
         Column() {
             // TODO: result score
             Text(
-                text = "Score",
+                text = "Score: ${usersState.users[0].userScore}",
                 textAlign = TextAlign.Center,
                 color = colorResource(id = R.color.bright_yellow),
                 style = MaterialTheme.typography.h3
@@ -63,7 +71,9 @@ fun ResultScreen(
                 Image(
                     painter = painterResource(id = R.drawable.ic_restart_button),
                     contentDescription = stringResource(id = R.string.restart_button_desc),
-                    modifier = Modifier.size(32.dp).padding(start = 10.dp)
+                    modifier = Modifier
+                        .size(32.dp)
+                        .padding(start = 10.dp)
                 )
                 Text(
                     text = stringResource(id = R.string.restart_game),

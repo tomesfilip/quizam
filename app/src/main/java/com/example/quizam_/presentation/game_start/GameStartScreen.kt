@@ -1,20 +1,13 @@
 package com.example.quizam_.presentation.game_start
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -26,7 +19,7 @@ import androidx.navigation.NavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.shared_components.ScreenHeadline
-import com.example.quizam_.presentation.ui.theme.Shapes
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun GameStartScreen(
@@ -34,8 +27,23 @@ fun GameStartScreen(
     viewModel: GameStartViewModel = hiltViewModel()
 ) {
     val userNameState = viewModel.userName.value
-    var usrName by remember { mutableStateOf("") }
+    val scaffoldState = rememberScaffoldState()
 //    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is GameStartViewModel.UiEvent.ShowSnackbar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.msg
+                    )
+                }
+                is GameStartViewModel.UiEvent.InsertUser -> {
+                    navController.navigate(Screen.CategoryListScreen.route)
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -57,10 +65,9 @@ fun GameStartScreen(
                             focusedBorderColor = colorResource(id = R.color.bright_yellow),
                             unfocusedBorderColor = colorResource(id = R.color.light_yellow)
                         ),
-                        value = usrName,
-                        onValueChange = { user ->
-                            usrName = user
-                            viewModel.onEvent(GameStartEvent.EnteredUserName(it.toString()))
+                        value = userNameState.text,
+                        onValueChange = {
+                            viewModel.onEvent(GameStartEvent.EnteredUserName(it))
                         },
                         label = {
                             Text(
@@ -75,8 +82,7 @@ fun GameStartScreen(
                     Button(
                         shape = RoundedCornerShape(40.dp),
                         onClick = {
-                            viewModel.onEvent(GameStartEvent.SaveUser)
-                            navController.navigate(Screen.CategoryListScreen.route)
+                            viewModel.onEvent(GameStartEvent.InsertUser)
                         },
                         colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.bright_yellow)),
                         modifier = Modifier.padding(12.dp),
@@ -84,7 +90,9 @@ fun GameStartScreen(
                         Image(
                             painter = painterResource(id = R.drawable.ic_play_button),
                             contentDescription = stringResource(id = R.string.play_button_desc),
-                            modifier = Modifier.size(32.dp).padding(start = 10.dp)
+                            modifier = Modifier
+                                .size(32.dp)
+                                .padding(start = 10.dp)
                         )
                         Text(
                             text = stringResource(id = R.string.start_game),
@@ -96,6 +104,4 @@ fun GameStartScreen(
             }
         }
     )
-
-
 }

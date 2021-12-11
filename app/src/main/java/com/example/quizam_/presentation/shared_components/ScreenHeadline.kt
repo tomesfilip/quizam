@@ -43,24 +43,3 @@ fun ScreenHeadline(
         contentColor = Color.Black
     )
 }
-
-//@Composable
-//fun ScreenHeadline(
-//    headlineText: String
-//) {
-//    Row() {
-//        Box(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(40.dp)
-//                .background(colorResource(id = R.color.bright_yellow))
-//        ) {
-//            Text(
-//                text = headlineText,
-//                color = Color.Black,
-//                style = MaterialTheme.typography.h1,
-//                textAlign = TextAlign.Center
-//            )
-//        }
-//    }
-//  }
