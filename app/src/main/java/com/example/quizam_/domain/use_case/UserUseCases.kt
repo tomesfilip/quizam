@@ -4,5 +4,6 @@ data class UserUseCases(
     val getUsers: GetUsers,
     val getLastUser: GetLastUser,
     val insertUser: InsertUser,
-    val deleteUser: DeleteUser
+    val updateUser: UpdateUser,
+    val deleteUser: DeleteUser,
 )

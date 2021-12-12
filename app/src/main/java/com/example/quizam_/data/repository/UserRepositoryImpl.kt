@@ -20,6 +20,10 @@ class UserRepositoryImpl(
         return userDao.insert(user)
     }
 
+    override suspend fun update(user: User) {
+        return userDao.update(user)
+    }
+
     override suspend fun delete(user: User) {
         return userDao.delete(user)
     }
