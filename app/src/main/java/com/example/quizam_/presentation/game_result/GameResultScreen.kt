@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -22,15 +23,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
-import com.example.quizam_.presentation.game_start.GameStartEvent
 
 @Composable
 fun ResultScreen(
     navController: NavController,
     viewModel: GameResultViewModel = hiltViewModel()
 ) {
-    val usersState = viewModel.usersState.value
-    Log.v("GameResultScreen", "usersState: ${usersState.users}")
+    val userState = viewModel.userState.value
+//    val userName = viewModel.userName.value
+//    val userScore = viewModel.userScore.value
+    Log.v("GameResultScreen", "userName: ${userState?.user}")
 
     Column(
         modifier = Modifier
@@ -42,25 +44,23 @@ fun ResultScreen(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // TODO: username
             Text(
-                text = "Username: ${usersState.users[0].userName}",
+                text = "Username: ${userState.user?.userName}",
                 textAlign = TextAlign.Center,
                 color = colorResource(id = R.color.bright_yellow),
-                style = MaterialTheme.typography.h3,
+                style = MaterialTheme.typography.h1
+                ,
                 modifier = Modifier.padding(end = 12.dp)
             )
 
-        }
-        Column() {
-            // TODO: result score
             Text(
-                text = "Score: ${usersState.users[0].userScore}",
+                text = "Score: ${userState.user?.userScore}",
                 textAlign = TextAlign.Center,
                 color = colorResource(id = R.color.bright_yellow),
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.h1
             )
         }
+
         Column() {
             Button(
                 shape = RoundedCornerShape(40.dp),

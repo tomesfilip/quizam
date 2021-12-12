@@ -4,13 +4,16 @@ import com.example.quizam_.domain.model.User
 import com.example.quizam_.data.database.UserDao
 import com.example.quizam_.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class UserRepositoryImpl @Inject constructor(
+class UserRepositoryImpl(
     private val userDao: UserDao
 ) : UserRepository {
-    override fun getAllUsers(): Flow<List<User>> {
-        return userDao.getAllUsers()
+    override fun getUsers(): Flow<List<User>> {
+        return userDao.getUsers()
+    }
+
+    override fun getLastUser(): Flow<User> {
+        return userDao.getLastUser()
     }
 
     override suspend fun insert(user: User) {
