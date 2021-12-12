@@ -1,23 +1,18 @@
 package com.example.quizam_.presentation.card_list
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.navOptions
 import com.example.quizam_.common.Constants
 import com.example.quizam_.common.Resource
-import com.example.quizam_.domain.model.QuizCard
-import com.example.quizam_.domain.model.User
 import com.example.quizam_.domain.use_case.GetQuizCards
 import com.example.quizam_.domain.use_case.UserUseCases
 import com.example.quizam_.presentation.game_result.UserState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -38,7 +33,6 @@ class CardListViewModel @Inject constructor(
     val cardDetailState: State<CardDetailState> = _cardDetailState
 
     private val _currentCardId = mutableStateOf(0)
-    val currentCardId: State<Int> = _currentCardId
 
     private val _userState = mutableStateOf(UserState())
     val userState: State<UserState> = _userState
@@ -55,25 +49,7 @@ class CardListViewModel @Inject constructor(
         getLastUser()
     }
 
-    fun nextQuizCard() {
-        if (_cardListState.value.cards.isNotEmpty()) {
-            _currentCardId.value += 1
-            if (_currentCardId.value < _cardListState.value.cards.size) {
-                _cardDetailState.value = CardDetailState(quizCard = _cardListState.value.cards[_currentCardId.value])
-            } else {
-                _cardDetailState.value = CardDetailState(
-                    quizCard = null
-                )
-            }
-        }
-    }
-
-    private fun getQuizCard(id: Int): QuizCard? {
-        return _cardListState.value.cards[id]
-    }
-
     private fun getLastUser() {
-        Log.v("GameResultViewModel", "private function getLastUser() start..")
         getLastUserJob?.cancel()
         getLastUserJob = userUseCases.getLastUser().onEach { user ->
             _userState.value = userState.value.copy(user = user)
@@ -107,12 +83,7 @@ class CardListViewModel @Inject constructor(
                                 it.userScore += 1
                                 userUseCases.updateUser(it)
                             }
-                        } else {
-                            Log.v("CardListViewModel", "invalid answer: ${event.option_answer}")
                         }
-
-                        Log.v("CardListViewModel", "current user: ${_userState.value.user} | question number: ${_currentCardId.value}")
-
                         if (_currentCardId.value >= 19) {
                             _gameOverState.value = true
                         } else {

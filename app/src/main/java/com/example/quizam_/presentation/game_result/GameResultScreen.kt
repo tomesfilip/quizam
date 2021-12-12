@@ -1,10 +1,8 @@
 package com.example.quizam_.presentation.game_result
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -30,9 +28,6 @@ fun ResultScreen(
     viewModel: GameResultViewModel = hiltViewModel()
 ) {
     val userState = viewModel.userState.value
-//    val userName = viewModel.userName.value
-//    val userScore = viewModel.userScore.value
-    Log.v("GameResultScreen", "userName: ${userState?.user}")
 
     Column(
         modifier = Modifier
