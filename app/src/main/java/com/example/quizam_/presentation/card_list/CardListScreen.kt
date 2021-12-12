@@ -1,5 +1,6 @@
 package com.example.quizam_.presentation.card_list
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.card_list.components.CardListCategoryBottom
@@ -32,6 +34,7 @@ fun CardListScreen(
     val cardListState = viewModel.cardListState.value
     val cardDetailState = viewModel.cardDetailState.value
     val userState = viewModel.userState.value
+    val gameOverState = viewModel.gameOverState.value
 
     Scaffold(
         topBar = {
@@ -56,30 +59,31 @@ fun CardListScreen(
                             navController.navigate(Screen.GameResultScreen.route)
                         } else {
                             cardDetailState.quizCard.let { currentCard ->
-                                if (currentCard != null) {
-                                    // quiz card item
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth(),
-                                    ) {
-                                        Text(
-                                            text = parseText(currentCard.question),
-                                            textAlign = TextAlign.Center,
-                                            style = MaterialTheme.typography.h2,
-                                            color = Color.White
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                ) {
+                                    Text(
+                                        text = parseText(currentCard.question),
+                                        textAlign = TextAlign.Center,
+                                        style = MaterialTheme.typography.h2,
+                                        color = Color.White
+                                    )
+                                    Spacer(modifier = Modifier.size(20.dp))
+                                    currentCard.options.forEach { option ->
+                                        QuizCardOption(
+                                            option = parseText(option),
+                                            onSelectOptionClick = {
+                                               viewModel.onEvent(QuizCardsEvent.ClickedOption(option_answer = option))
+                                               if (gameOverState) {
+                                                   navController.navigate(Screen.GameResultScreen.route)
+                                               }
+                                            }
                                         )
-                                        Spacer(modifier = Modifier.size(20.dp))
-                                        currentCard.options.forEach { option ->
-                                            QuizCardOption(
-                                                option = parseText(option),
-                                                onSelectOptionClick = { viewModel.onEvent(QuizCardsEvent.ClickedOption(option_answer = option)) }
-                                            )
-                                        }
                                     }
                                 }
                             }
                         }
-
                     }
                 }
 
@@ -107,5 +111,3 @@ fun CardListScreen(
         }
     )
 }
-
-

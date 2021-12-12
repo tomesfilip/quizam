@@ -1,6 +1,7 @@
 package com.example.quizam_.presentation.card_list
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -41,6 +42,9 @@ class CardListViewModel @Inject constructor(
 
     private val _userState = mutableStateOf(UserState())
     val userState: State<UserState> = _userState
+
+    private val _gameOverState = mutableStateOf(false)
+    val gameOverState: MutableState<Boolean> = _gameOverState
 
     private var getLastUserJob: Job? = null
 
@@ -106,13 +110,17 @@ class CardListViewModel @Inject constructor(
                         } else {
                             Log.v("CardListViewModel", "invalid answer: ${event.option_answer}")
                         }
-                        _currentCardId.value += 1
-//                        _cardDetailState.value.quizCard = cardListState.value.cards[currentCardId]
-                        Log.v("CardListViewModel", "current user: ${_userState.value.user}")
-                        _cardDetailState.value = CardDetailState(
-                            cardListState.value.cards[_currentCardId.value]
-                        );
 
+                        Log.v("CardListViewModel", "current user: ${_userState.value.user} | question number: ${_currentCardId.value}")
+
+                        if (_currentCardId.value >= 19) {
+                            _gameOverState.value = true
+                        } else {
+                            _currentCardId.value += 1
+                            _cardDetailState.value = CardDetailState(
+                                cardListState.value.cards[_currentCardId.value]
+                            )
+                        }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
