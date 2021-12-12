@@ -48,8 +48,7 @@ fun ResultScreen(
                 text = "Username: ${userState.user?.userName}",
                 textAlign = TextAlign.Center,
                 color = colorResource(id = R.color.bright_yellow),
-                style = MaterialTheme.typography.h1
-                ,
+                style = MaterialTheme.typography.h1,
                 modifier = Modifier.padding(end = 12.dp)
             )
 
