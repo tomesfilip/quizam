@@ -70,7 +70,8 @@ object AppModule {
             getLastUser = GetLastUser(userRepository),
             insertUser = InsertUser(userRepository),
             updateUser = UpdateUser(userRepository),
-            deleteUser = DeleteUser(userRepository)
+            deleteUser = DeleteUser(userRepository),
+            deleteUsers = DeleteUsers(userRepository)
         )
     }
 }

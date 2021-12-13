@@ -28,7 +28,6 @@ fun GameStartScreen(
 ) {
     val userNameState = viewModel.userName.value
     val scaffoldState = rememberScaffoldState()
-//    val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -84,7 +83,9 @@ fun GameStartScreen(
                         onClick = {
                             viewModel.onEvent(GameStartEvent.InsertUser)
                         },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.bright_yellow)),
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = colorResource(id = R.color.bright_yellow)
+                        ),
                         modifier = Modifier.padding(12.dp),
                     ) {
                         Image(

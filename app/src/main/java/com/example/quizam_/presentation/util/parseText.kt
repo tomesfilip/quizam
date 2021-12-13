@@ -1,13 +1,8 @@
 package com.example.quizam_.presentation.util
 
-fun parseText(txt: String): String {
-    var parsedTxt: String = txt
-    parsedTxt = parsedTxt
-        .replace("""&quot;|&#039;|&rdquo;|&ldquo;|&rsquo;|&lsquo;""".toRegex(), "'")
-    parsedTxt = parsedTxt.replace("""&amp;""".toRegex(), "&")
-    parsedTxt = parsedTxt.replace("""&hellip;""".toRegex(), "...")
-    parsedTxt = parsedTxt.replace("""&ntilde;""".toRegex(), "ñ")
-    parsedTxt = parsedTxt.replace("""&ntilde;""".toRegex(), "á")
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
 
-    return parsedTxt
+fun parseText(txt: String): String {
+    return Html.fromHtml(txt, FROM_HTML_MODE_LEGACY).toString()
 }

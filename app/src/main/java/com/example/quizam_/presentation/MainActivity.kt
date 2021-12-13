@@ -26,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quizam_.R
+import com.example.quizam_.presentation.game_leaderboard.GameLeaderBoardScreen
 import com.example.quizam_.presentation.card_list.CardListScreen
 import com.example.quizam_.presentation.category_list.CategoryListScreen
 import com.example.quizam_.presentation.game_start.GameStartScreen
@@ -60,7 +61,7 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "splash_screen") {
         composable("splash_screen") {
-            SplashScreen(navController = navController)
+            SplashScreen(navController)
         }
         composable(Screen.GameStartScreen.route) {
             GameStartScreen(navController)
@@ -70,12 +71,14 @@ fun Navigation() {
         }
         composable(
             route = Screen.CardListScreen.route + "/{category}"
-//            route = Screen.CardListScreen.route
         ) {
-            CardListScreen(navController = navController)
+            CardListScreen(navController)
         }
         composable(Screen.GameResultScreen.route) {
             ResultScreen(navController)
+        }
+        composable(Screen.GameLeaderBoardScreen.route) {
+            GameLeaderBoardScreen(navController)
         }
 
     }
@@ -98,7 +101,6 @@ fun SplashScreen(navController: NavController) {
         )
         delay(1000L)
         navController.navigate(Screen.GameStartScreen.route)
-//        navController.navigate(Screen.CategoryListScreen.route)
 
     }
     Box(contentAlignment = Alignment.Center,

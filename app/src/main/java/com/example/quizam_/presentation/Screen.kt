@@ -5,5 +5,5 @@ sealed class Screen(val route: String) {
     object CategoryListScreen: Screen("category_list_screen")
     object CardListScreen: Screen("card_list_screen")
     object GameResultScreen: Screen("game_result_screen")
-//    object CardDetailScreen: Screen("card_detail_screen")
+    object GameLeaderBoardScreen: Screen("game_leader_board_screen")
 }

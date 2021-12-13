@@ -1,11 +1,15 @@
 package com.example.quizam_.presentation.card_list
 
+import android.content.Context
+import android.media.MediaPlayer
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.quizam_.R
 import com.example.quizam_.common.Constants
 import com.example.quizam_.common.Resource
 import com.example.quizam_.domain.use_case.GetQuizCards
@@ -58,7 +62,9 @@ class CardListViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     _cardListState.value = CardListState(cards = result.data ?: emptyList())
-                    _cardDetailState.value = CardDetailState(quizCard = result.data?.get(_currentCardId.value))
+                    _cardDetailState.value = CardDetailState(
+                        quizCard = result.data?.get(_currentCardId.value)
+                    )
                 }
                 is Resource.Error -> {
                     _cardListState.value = CardListState(error = result.message ?: "Error occurred")
@@ -70,16 +76,30 @@ class CardListViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun onEvent(event: QuizCardsEvent) {
+    private fun playCorrectAnswerSound(context: Context) {
+        val mediaPlayer: MediaPlayer = MediaPlayer.create(context, R.raw.correct)
+        mediaPlayer.start()
+    }
+
+    private fun playIncorrectAnswerSound(context: Context) {
+        val mediaPlayer: MediaPlayer = MediaPlayer.create(context, R.raw.incorrect)
+        mediaPlayer.start()
+    }
+
+    fun onEvent(event: QuizCardsEvent, context: Context) {
         when(event) {
             is QuizCardsEvent.ClickedOption -> {
                 viewModelScope.launch {
                     try {
                         if (event.option_answer == _cardDetailState.value.quizCard?.correct_answer) {
+                            playCorrectAnswerSound(context)
                             _userState.value.user?.let {
                                 it.userScore += 1
                                 userUseCases.updateUser(it)
                             }
+
+                        } else {
+                            playIncorrectAnswerSound(context)
                         }
                         _currentCardId.value += 1
                         if (_currentCardId.value < cardListState.value.cards.size) {
@@ -87,7 +107,6 @@ class CardListViewModel @Inject constructor(
                                 cardListState.value.cards[_currentCardId.value]
                             )
                         }
-
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }

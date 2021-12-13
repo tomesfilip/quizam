@@ -9,4 +9,8 @@
     <string name="restart_game">Restart game</string>
     <string name="play_button_desc">Play icon</string>
     <string name="restart_button_desc">Restart icon</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboard_button_desc">Restart icon</string>
+    <string name="clear_button_desc">dustbin icon</string>
+    <string name="clear_leaderboard">Clear leaderboard</string>
 </resources>

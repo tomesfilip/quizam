@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,10 @@ fun CardListScreen(
     val cardListState = viewModel.cardListState.value
     val cardDetailState = viewModel.cardDetailState.value
     val userState = viewModel.userState.value
+
+    val context = LocalContext.current
+
+
 
     Scaffold(
         topBar = {
@@ -56,7 +61,8 @@ fun CardListScreen(
                             cardDetailState.quizCard.let { currentCard ->
                                 Column(
                                     modifier = Modifier
-                                        .fillMaxWidth(),
+                                        .fillMaxWidth()
+                                        .align(Alignment.CenterHorizontally)
                                 ) {
                                     Text(
                                         text = parseText(currentCard.question),
@@ -70,7 +76,10 @@ fun CardListScreen(
                                             option = parseText(option),
                                             onSelectOptionClick = {
                                                 viewModel.onEvent(
-                                                    QuizCardsEvent.ClickedOption(option_answer = option)
+                                                    event = QuizCardsEvent.ClickedOption(
+                                                        option_answer = option
+                                                    ),
+                                                    context = context
                                                 )
                                                 if (cardListState.cards[cardListState.cards.size - 1] == currentCard) {
                                                     navController.navigate(Screen.GameResultScreen.route)
