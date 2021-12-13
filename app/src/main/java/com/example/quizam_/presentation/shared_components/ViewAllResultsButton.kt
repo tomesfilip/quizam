@@ -24,7 +24,7 @@ import com.example.quizam_.presentation.Screen
 fun ViewAllResultsButton(navController: NavController) {
     Button(
         shape = RoundedCornerShape(40.dp),
-        onClick = { navController.navigate(Screen.GameLeaderBoardScreen.route)},
+        onClick = { navController.navigate(Screen.GameLeaderBoardScreen.route) },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = R.color.bright_yellow)
         ),

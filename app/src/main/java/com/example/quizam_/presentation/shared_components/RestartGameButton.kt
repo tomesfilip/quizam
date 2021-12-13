@@ -24,7 +24,7 @@ import com.example.quizam_.presentation.Screen
 fun RestartGameButton(navController: NavController) {
     Button(
         shape = RoundedCornerShape(40.dp),
-        onClick = { navController.navigate(Screen.GameStartScreen.route)},
+        onClick = { navController.navigate(Screen.GameStartScreen.route) },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = R.color.bright_yellow)
         ),

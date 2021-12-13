@@ -1,10 +1,10 @@
 package com.example.quizam_.presentation.shared_components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -23,7 +23,7 @@ fun ScreenHeadline(
 ) {
     TopAppBar(
         modifier = Modifier.height(80.dp),
-         title = {
+        title = {
             Column(
                 Modifier
                     .fillMaxWidth()
@@ -38,7 +38,7 @@ fun ScreenHeadline(
                     maxLines = 1
                 )
             }
-         },
+        },
         backgroundColor = colorResource(id = R.color.bright_yellow),
         contentColor = Color.Black
     )

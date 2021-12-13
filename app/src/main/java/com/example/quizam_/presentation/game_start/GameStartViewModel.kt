@@ -11,7 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 
@@ -34,7 +33,7 @@ class GameStartViewModel @Inject constructor(
             is GameStartEvent.EnteredUserName -> {
                 _userName.value = userName.value.copy(text = event.value)
             }
-            is GameStartEvent.InsertUser  -> {
+            is GameStartEvent.InsertUser -> {
                 viewModelScope.launch {
                     try {
                         userUseCases.insertUser(
@@ -57,6 +56,6 @@ class GameStartViewModel @Inject constructor(
 
     sealed class UiEvent {
         data class ShowSnackbar(val msg: String) : UiEvent()
-        object InsertUser: UiEvent()
+        object InsertUser : UiEvent()
     }
 }

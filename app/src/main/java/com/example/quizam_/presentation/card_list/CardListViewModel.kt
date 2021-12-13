@@ -2,10 +2,8 @@ package com.example.quizam_.presentation.card_list
 
 import android.content.Context
 import android.media.MediaPlayer
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,7 +18,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -87,7 +84,7 @@ class CardListViewModel @Inject constructor(
     }
 
     fun onEvent(event: QuizCardsEvent, context: Context) {
-        when(event) {
+        when (event) {
             is QuizCardsEvent.ClickedOption -> {
                 viewModelScope.launch {
                     try {

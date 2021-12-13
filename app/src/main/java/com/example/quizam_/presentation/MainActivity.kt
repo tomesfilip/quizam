@@ -26,11 +26,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quizam_.R
-import com.example.quizam_.presentation.game_leaderboard.GameLeaderBoardScreen
 import com.example.quizam_.presentation.card_list.CardListScreen
 import com.example.quizam_.presentation.category_list.CategoryListScreen
-import com.example.quizam_.presentation.game_start.GameStartScreen
+import com.example.quizam_.presentation.game_leaderboard.GameLeaderBoardScreen
 import com.example.quizam_.presentation.game_result.ResultScreen
+import com.example.quizam_.presentation.game_start.GameStartScreen
 import com.example.quizam_.presentation.ui.theme.Quizam_Theme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -103,10 +103,12 @@ fun SplashScreen(navController: NavController) {
         navController.navigate(Screen.GameStartScreen.route)
 
     }
-    Box(contentAlignment = Alignment.Center,
-    modifier = Modifier
-        .fillMaxSize()
-        .background(colorResource(id = R.color.light_red))) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.light_red))
+    ) {
         Image(
             painter = painterResource(id = R.drawable.ic_quizam_logo),
             contentDescription = "Logo",

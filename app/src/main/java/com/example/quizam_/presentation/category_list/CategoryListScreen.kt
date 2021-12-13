@@ -4,11 +4,9 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,12 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.category_list.components.CategoryListItem
@@ -53,11 +48,12 @@ fun CategoryContent(
     viewModel: CategoryListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.light_red))) {
+            .background(colorResource(id = R.color.light_red))
+    ) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),
             contentPadding = PaddingValues(32.dp),
@@ -67,7 +63,7 @@ fun CategoryContent(
             items(state.categories) { category ->
                 CategoryListItem(
                     quizCategory = category,
-                    onItemClick =  {
+                    onItemClick = {
                         navController.navigate(Screen.CardListScreen.route + "/${category.id}")
                     }
                 )

@@ -15,13 +15,18 @@ class GetQuizCards @Inject constructor(
 ) {
     operator fun invoke(category: Int): Flow<Resource<List<QuizCard>>> = flow {
         try {
-            emit(Resource.Loading<List<QuizCard>>())
-            val quizCards = repository.getQuizCardsByCategory(category).results.map { it.toQuizCard() }
-            emit(Resource.Success<List<QuizCard>>(quizCards))
+            emit(Resource.Loading())
+            val quizCards =
+                repository.getQuizCardsByCategory(category).results.map { it.toQuizCard() }
+            emit(Resource.Success(quizCards))
         } catch (e: HttpException) {
-            emit(Resource.Error<List<QuizCard>>(e.localizedMessage ?: "Unexpected http error occurred."))
+            emit(
+                Resource.Error(
+                    e.localizedMessage ?: "Unexpected http error occurred."
+                )
+            )
         } catch (e: IOException) {
-            emit(Resource.Error<List<QuizCard>>("Connection error: check your connection."))
+            emit(Resource.Error("Connection error: check your connection."))
         }
     }
 }

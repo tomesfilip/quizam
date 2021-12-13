@@ -1,6 +1,5 @@
 package com.example.quizam_.presentation.game_leaderboard
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -21,7 +20,6 @@ class GameLeaderBoardViewModel @Inject constructor(
     val usersState: State<UsersState> = _usersState
 
     private var getUsersJob: Job? = null
-    private var deleteUsersJob: Job? = null
 
     init {
         getUsers()

@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizam_.R
-import com.example.quizam_.presentation.shared_components.ClearLeaderBoardButton
 import com.example.quizam_.presentation.shared_components.RestartGameButton
 import com.example.quizam_.presentation.shared_components.ScreenHeadline
 

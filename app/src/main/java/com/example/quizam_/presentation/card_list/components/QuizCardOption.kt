@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun QuizCardOption (
+fun QuizCardOption(
     option: String,
     onSelectOptionClick: () -> Unit
 ) {
@@ -24,7 +24,9 @@ fun QuizCardOption (
             backgroundColor = Color.Yellow
         ),
         shape = RoundedCornerShape(topStartPercent = 50, bottomEndPercent = 50),
-        modifier = Modifier.padding(10.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
     ) {
         Text(
             text = option,
