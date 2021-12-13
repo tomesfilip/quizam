@@ -1,5 +1,6 @@
 package com.example.quizam_.presentation.game_result
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizam_.R
+import com.example.quizam_.presentation.Screen
 import com.example.quizam_.presentation.shared_components.RestartGameButton
 import com.example.quizam_.presentation.shared_components.ViewAllResultsButton
 
@@ -25,6 +27,10 @@ fun ResultScreen(
     viewModel: GameResultViewModel = hiltViewModel()
 ) {
     val userState = viewModel.userState.value
+
+    BackHandler() {
+        navController.navigate(Screen.GameStartScreen.route)
+    }
 
     Column(
         modifier = Modifier

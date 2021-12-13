@@ -16,8 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameStartViewModel @Inject constructor(
-    private val userUseCases: UserUseCases,
-    savedStateHandle: SavedStateHandle
+    private val userUseCases: UserUseCases
 ) : ViewModel() {
 
     private val _userName = mutableStateOf(

@@ -1,5 +1,7 @@
 package com.example.quizam_.presentation.game_start
 
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizam_.R
 import com.example.quizam_.presentation.Screen
+import com.example.quizam_.presentation.shared_components.QuitGameAlert
 import com.example.quizam_.presentation.shared_components.ScreenHeadline
 import kotlinx.coroutines.flow.collectLatest
 
@@ -29,6 +32,9 @@ fun GameStartScreen(
 ) {
     val userNameState = viewModel.userName.value
     val scaffoldState = rememberScaffoldState()
+
+    BackHandler() {
+    }
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->

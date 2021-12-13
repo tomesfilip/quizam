@@ -1,5 +1,6 @@
 package com.example.quizam_.presentation.card_list
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
@@ -33,10 +34,11 @@ fun CardListScreen(
     val cardListState = viewModel.cardListState.value
     val cardDetailState = viewModel.cardDetailState.value
     val userState = viewModel.userState.value
-
     val context = LocalContext.current
 
-
+    BackHandler() {
+        navController.navigate(Screen.GameStartScreen.route)
+    }
 
     Scaffold(
         topBar = {
