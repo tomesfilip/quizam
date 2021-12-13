@@ -10,7 +10,7 @@ class GetUsers(
 ) {
     operator fun invoke(): Flow<List<User>> {
         return userRepository.getUsers().map { users ->
-            users.sortedBy { it.userScore }
+            users.sortedByDescending { it.userScore }
         }
     }
 }
