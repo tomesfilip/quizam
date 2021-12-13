@@ -32,11 +32,10 @@ fun CardListScreen(
     val cardListState = viewModel.cardListState.value
     val cardDetailState = viewModel.cardDetailState.value
     val userState = viewModel.userState.value
-    val gameOverState = viewModel.gameOverState.value
 
     Scaffold(
         topBar = {
-            ScreenHeadline(headlineText = "score: ${userState.user?.userScore}")
+            ScreenHeadline(headlineText = "${userState.user?.userScore} points")
         },
         content = {
             Column(
@@ -53,9 +52,7 @@ fun CardListScreen(
                 ) {
                     Spacer(modifier = Modifier.size(40.dp))
                     if (cardListState.cards.isNotEmpty()) {
-                        if (cardDetailState.quizCard == null) {
-                            navController.navigate(Screen.GameResultScreen.route)
-                        } else {
+                        if (cardDetailState.quizCard != null) {
                             cardDetailState.quizCard.let { currentCard ->
                                 Column(
                                     modifier = Modifier
@@ -72,10 +69,12 @@ fun CardListScreen(
                                         QuizCardOption(
                                             option = parseText(option),
                                             onSelectOptionClick = {
-                                               viewModel.onEvent(QuizCardsEvent.ClickedOption(option_answer = option))
-                                               if (gameOverState) {
-                                                   navController.navigate(Screen.GameResultScreen.route)
-                                               }
+                                                viewModel.onEvent(
+                                                    QuizCardsEvent.ClickedOption(option_answer = option)
+                                                )
+                                                if (cardListState.cards[cardListState.cards.size - 1] == currentCard) {
+                                                    navController.navigate(Screen.GameResultScreen.route)
+                                                }
                                             }
                                         )
                                     }

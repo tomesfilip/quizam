@@ -37,9 +37,6 @@ class CardListViewModel @Inject constructor(
     private val _userState = mutableStateOf(UserState())
     val userState: State<UserState> = _userState
 
-    private val _gameOverState = mutableStateOf(false)
-    val gameOverState: MutableState<Boolean> = _gameOverState
-
     private var getLastUserJob: Job? = null
 
     init {
@@ -84,14 +81,13 @@ class CardListViewModel @Inject constructor(
                                 userUseCases.updateUser(it)
                             }
                         }
-                        if (_currentCardId.value >= 19) {
-                            _gameOverState.value = true
-                        } else {
-                            _currentCardId.value += 1
+                        _currentCardId.value += 1
+                        if (_currentCardId.value < cardListState.value.cards.size) {
                             _cardDetailState.value = CardDetailState(
                                 cardListState.value.cards[_currentCardId.value]
                             )
                         }
+
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
